@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Olá mundo</title>
+        <style>
+            .greeting {
+                color: green;
+            }
+            .box-div{
+                border-style: solid;
+                border-radius: 10px;
+                width: 30%;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="root"></div>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            ReactDOM.render(
+                <div>
+                    <h1 className="greeting">Olá mundo</h1>
+                    <h2 className="title">React</h2>
+                    <div className="box-div">
+                        <p>Olá mundo</p>
+                        <p>React</p>
+                    </div>
+                </div>,
+                document.getElementById('root')
+            );
+        </script>
+    </body>
+</html>

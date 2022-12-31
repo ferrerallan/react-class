@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Olá mundo</title>
+        <style>
+            .greeting {
+                color: green;
+            }
+            .title {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1></h1>
+        <div id="root"></div>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script>
+            ReactDOM.render(
+                React.createElement('h1', 
+                                    { className: 'greeting' }, 
+                                    'Olá mundo'),
+                document.getElementById('root')
+            );
+        </script>
+    </body>
+</html>

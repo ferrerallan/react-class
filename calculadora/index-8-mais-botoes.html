@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before,*:after{
+            box-sizing: inherit;
+        }
+
+        body{
+            margin:0;
+            background-color: #121212;
+            font-family: sans-serif;
+        }
+        .header{
+            text-align: center;
+            background-color: #333;
+            color:#fff;
+            padding: 16px;
+            border-radius: 4px;
+        }
+        .calculator{
+            margin: 40px auto;
+            background-color: #fff;
+            max-width: 400px;
+            padding: 16px;
+            border-radius: 4px;
+        }
+        .display{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.2em;
+        }
+        .keyboard{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 16px;
+            font-size: 1.2em;
+            margin-top: 16px;
+            
+        }
+        button{
+            border: 0;
+            border-radius: 4px;
+            background-color: #efefef;
+            padding: 8px;
+            cursor: pointer;
+            font-weight:bold;
+        }
+
+        .span2{
+            grid-column: span 2;
+        }
+
+        button.primary{
+            background-color: rgb(237, 186, 18);
+            color: rgb(0, 0, 0);
+        }
+
+    </style>
+    <title>Projeto calculadora</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        /*Se a arrow function retorna somente 1 elemento
+        nao precisa do return nem chaves.
+        Parenteses tb nao precisa mas melhora visualização*/
+        const Header = () => (
+                <div className="header">Calculadora</div>
+            );   
+            
+        const Button = (props) => (
+            <button 
+                onClick={
+                    ()=>{
+                        props.onNumberClick(props.value);
+                    }
+                }
+                className={props.className}
+            >
+                {props.value}
+            </button>
+        );
+        
+        /*outro jeito de escrever Button, desconstruindo props*/
+        const ButtonRefact = (props) =>{
+            const {value, onNumberClick, className} = props;
+            return (
+            <button 
+                onClick={
+                    ()=> {
+                        onNumberClick(value);
+                    }
+                }
+                className={className}
+            >
+                {value}
+            </button>
+        )};
+
+         /*mais um jeito de escrever Button, desconstruindo props*/
+         const ButtonRefact2 = ({value, onNumberClick, className}) =>
+            (
+            <button 
+                onClick={
+                    ()=> {
+                        onNumberClick(value);
+                    }
+                }
+                className={className}
+            >
+                {value}
+            </button>
+        );
+
+        const Calculator = () =>{
+            
+            const [display, setDisplay] = React.useState("");
+
+            const handleNumberClick = (value) => {
+                if (value === "="){
+                    setDisplay(eval(display));
+                }
+                else                    
+                    setDisplay(display+value);
+            }
+
+            const renderNumbers = () => {
+                const avaiableNumbers = [7,8,9,"/","",
+                                         4,5,6,"*","",
+                                         1,2,3,"-","",
+                                         0,".","+","="];
+                
+                return (
+                    avaiableNumbers.map((number) => {
+                        const span2Class = number === 0 ? 'span2' : '';
+                        let primaryClass = number == '.' ? 'primary' : '';
+                        primaryClass = isNaN(number) ? 'primary' : '';
+                        return (
+                        <Button
+                            key={number}
+                            value={number}
+                            onNumberClick={handleNumberClick}
+                            className={`${span2Class} ${primaryClass}`}
+                        />
+                    )})
+                )
+            }
+
+            return (
+                <div className="calculator">
+                    <div className="display">
+                        {display}
+                    </div>
+                    <div className="keyboard">
+                        {renderNumbers()}                          
+                    </div>
+                </div>
+            )
+        }
+
+        function App(){
+            return (
+                <div>
+                    <Header/>
+                    <Calculator/>                    
+                </div>
+            )
+        }
+        ReactDOM.render(
+            <App/>,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Olá mundo</title>
+        <style>
+            .box {
+                box-shadow: 3px 3px 10px gray;
+                padding: 10px;
+                width: 50%;
+            }
+            .title {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1></h1>
+        <div id="root"></div>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script>
+            ReactDOM.render(
+                React.createElement('div', 
+                                    { className: 'box' }, 
+                                    React.createElement(
+                                        'h1', 
+                                        null, 
+                                        'Titulo'
+                                    ),
+                                    'Linha 1',
+                                    React.createElement(
+                                        'br'
+                                    ),
+                                    'Linha 2',
+                                    React.createElement(
+                                        'p',
+                                        { className: 'title' },
+                                        'Paragrafo principal'
+                                    ),
+                                ),
+                document.getElementById('root')
+            );
+        </script>
+    </body>
+</html>
