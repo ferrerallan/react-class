@@ -1,0 +1,9 @@
+.App {
+    background-color: black;
+}
+h1{
+    color: white;
+}
+a:visited {
+    color: inherit;
+  }
